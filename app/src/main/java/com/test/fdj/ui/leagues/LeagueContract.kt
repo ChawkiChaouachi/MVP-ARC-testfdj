@@ -8,7 +8,7 @@ class LeagueContract {
         fun initializeLeaguesList(leagues : Leagues)
     }
     interface Presenter {
-        fun getArticle()
+        fun getLeague()
 
     }
 }
