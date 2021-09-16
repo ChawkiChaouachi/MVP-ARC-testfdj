@@ -2,6 +2,7 @@ package com.test.clientthesportsdb.network
 
 import android.util.Log
 import com.test.clientthesportsdb.model.Leagues
+import com.test.clientthesportsdb.model.Teams
 import okhttp3.ConnectionSpec
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,7 +17,7 @@ interface TheSportApi {
     suspend fun getAllLeagues() : Leagues
 
     @GET("/api/v1/json/1/lookup_all_teams.php?id={id}")
-    suspend fun getAllTeamsByLeagues(@Path("id") id: String) : Leagues
+    suspend fun getAllTeamsByLeagues(@Path("id") id: String) : Teams
 
 }
 

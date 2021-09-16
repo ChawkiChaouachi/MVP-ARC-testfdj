@@ -5,5 +5,5 @@ import com.test.clientthesportsdb.model.Teams
 
 interface RemoteResources {
         suspend fun requestAllLeagues() : Resource<Leagues>
-        suspend fun requestAllTeamsByLeagues() : Resource<Teams>
+        suspend fun requestAllTeamsByLeagues(idLeague : String) : Resource<Teams>
 }
