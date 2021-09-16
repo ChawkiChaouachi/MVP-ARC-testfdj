@@ -41,5 +41,9 @@ class LeaguesPresenter @Inject constructor(private val getAllLeaguesUseCase: Get
         }
     }
 
+    override fun getTeamsByLeague(idLeague: String) {
+        TODO("Not yet implemented")
+    }
+
 
 }
