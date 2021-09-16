@@ -1,6 +1,7 @@
 package com.test.fdj.ui.leagues
 
 import com.test.clientthesportsdb.respository.SuccessResource
+import com.test.fdj.modelapp.sLeague
 import com.test.fdj.ui.base.Presenter
 import com.test.fdj.usescases.GetAllLeaguesUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -20,10 +21,13 @@ class LeaguesPresenter @Inject constructor(private val getAllLeaguesUseCase: Get
     override fun getLeague() {
         launch(Dispatchers.Main) {
             try {
-                val resources = getAllLeaguesUseCase.invoke().collect {
+                getAllLeaguesUseCase.invoke().collect {
                     when (it) {
-                        is SuccessResource<*> -> {
+                        is SuccessResource<List<sLeague>> -> {
+                            getView()?.initializeLeaguesList(it.value)
 
+                        }
+                        else ->{
 
                         }
                     }
