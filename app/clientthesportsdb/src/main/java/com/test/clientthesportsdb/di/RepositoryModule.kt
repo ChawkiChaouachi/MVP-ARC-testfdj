@@ -1,8 +1,6 @@
 package com.test.clientthesportsdb.di
 
-import com.test.clientthesportsdb.network.THE_SPORT_SDB_ACCESS_POINT_NETWORK_ADDRESS
 import com.test.clientthesportsdb.network.TheSportApi
-import com.test.clientthesportsdb.network.createClientWebService
 import com.test.clientthesportsdb.respository.Repository
 import dagger.Module
 import dagger.Provides
