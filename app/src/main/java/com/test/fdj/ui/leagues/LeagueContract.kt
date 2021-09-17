@@ -9,6 +9,10 @@ class LeagueContract {
     interface View : BaseView {
         fun initializeLeaguesList(leagues : List<sLeague>)
         fun publishTeamsByLeagues(teams : List<STeam>)
+        fun showError()
+        fun retry(isLeagueRequest : Boolean,idLeague: String)
+        fun showLoading()
+        fun hideLoading()
     }
     interface Presenter {
         fun getLeague()
