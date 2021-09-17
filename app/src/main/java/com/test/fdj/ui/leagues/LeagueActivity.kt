@@ -41,7 +41,7 @@ class LeagueActivity : BaseActivity() ,LeagueContract.View{
         )
         findViewById<AutoCompleteTextView>(R.id.leagues_autocomplete).setAdapter(adapter)
         findViewById<AutoCompleteTextView>(R.id.leagues_autocomplete).onItemClickListener =
-            AdapterView.OnItemClickListener { adapterView, view, i, l ->
+            AdapterView.OnItemClickListener { _, _, i, l ->
                 presenterLeague.getTeamsByLeague(leagues[i].idLeague)
             }
     }
