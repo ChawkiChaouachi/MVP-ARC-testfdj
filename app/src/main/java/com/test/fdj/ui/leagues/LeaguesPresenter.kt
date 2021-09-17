@@ -1,9 +1,11 @@
 package com.test.fdj.ui.leagues
 
 import com.test.clientthesportsdb.respository.SuccessResource
+import com.test.fdj.modelapp.STeam
 import com.test.fdj.modelapp.sLeague
 import com.test.fdj.ui.base.Presenter
 import com.test.fdj.usescases.GetAllLeaguesUseCase
+import com.test.fdj.usescases.GetAllTeamsByLeagueUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -13,6 +15,7 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class LeaguesPresenter @Inject constructor(private val getAllLeaguesUseCase: GetAllLeaguesUseCase,
+                                           private val getAllTeamsByLeagueUseCase: GetAllTeamsByLeagueUseCase,
                                            override val coroutineContext: CoroutineContext
 ):LeagueContract.Presenter,
     CoroutineScope, Presenter<LeagueContract.View>() {
@@ -42,7 +45,26 @@ class LeaguesPresenter @Inject constructor(private val getAllLeaguesUseCase: Get
     }
 
     override fun getTeamsByLeague(idLeague: String) {
-        TODO("Not yet implemented")
+        launch(Dispatchers.Main) {
+            try {
+                getAllTeamsByLeagueUseCase.invoke(idLeague).collect {
+                    when (it) {
+                        is SuccessResource<List<STeam>> -> {
+                            getView()?.publishTeamsByLeagues(it.value)
+
+                        }
+                        else ->{
+
+                        }
+                    }
+
+                }
+
+
+            } catch (e: Exception) {
+
+            }
+        }
     }
 
 

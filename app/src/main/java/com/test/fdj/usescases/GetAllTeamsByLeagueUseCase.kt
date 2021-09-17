@@ -5,7 +5,6 @@ import com.test.clientthesportsdb.respository.Repository
 import com.test.clientthesportsdb.respository.Resource
 import com.test.clientthesportsdb.respository.SuccessResource
 import com.test.fdj.modelapp.STeam
-import com.test.fdj.modelapp.sLeague
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
