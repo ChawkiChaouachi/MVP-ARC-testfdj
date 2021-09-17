@@ -3,6 +3,8 @@ package com.test.fdj.di
 import com.test.clientthesportsdb.respository.Repository
 import com.test.fdj.usescases.GetAllLeaguesUseCase
 import com.test.fdj.usescases.GetAllLeaguesUseCaseImpl
+import com.test.fdj.usescases.GetAllTeamsByLeagueUseCase
+import com.test.fdj.usescases.GetAllTeamsByLeagueUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +20,10 @@ object UsesCasesModule {
     @Provides
     fun provideAllLeaguesUseCase(repository: Repository): GetAllLeaguesUseCase {
         return GetAllLeaguesUseCaseImpl(repository)
+    }
+    @Provides
+    fun provideAllTeamsUseCase(repository: Repository): GetAllTeamsByLeagueUseCase {
+        return GetAllTeamsByLeagueUseCaseImpl(repository)
     }
     @Provides
     fun provideCoroutineContext(): CoroutineContext {

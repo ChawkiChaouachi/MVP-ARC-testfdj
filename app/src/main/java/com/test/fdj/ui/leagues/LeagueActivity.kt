@@ -10,6 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import com.test.fdj.modelapp.STeam
 
 
 @AndroidEntryPoint
@@ -41,11 +42,11 @@ class LeagueActivity : BaseActivity() ,LeagueContract.View{
         findViewById<AutoCompleteTextView>(R.id.leagues_autocomplete).setAdapter(adapter)
         findViewById<AutoCompleteTextView>(R.id.leagues_autocomplete).onItemClickListener =
             AdapterView.OnItemClickListener { adapterView, view, i, l ->
-
+                presenterLeague.getTeamsByLeague(leagues[i].idLeague)
             }
     }
 
-    override fun publishTeamsByLeagues() {
+    override fun publishTeamsByLeagues(team :List<STeam>) {
         TODO("Not yet implemented")
     }
 
