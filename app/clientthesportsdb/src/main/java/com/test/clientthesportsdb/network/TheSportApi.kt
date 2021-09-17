@@ -9,20 +9,19 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface TheSportApi {
 
     @GET("/api/v1/json/1/all_leagues.php")
-    suspend fun getAllLeagues() : Leagues
+    suspend fun getAllLeagues(): Leagues
 
-    @GET("/api/v1/json/1/lookup_all_teams.php?id={id}")
-    suspend fun getAllTeamsByLeagues(@Path("id") id: String) : Teams
+    @GET("/api/v1/json/1/lookup_all_teams.php")
+    suspend fun getAllTeamsByLeagues(@Query("id",encoded = true) id: String): Teams
 
 }
 
 fun createClientWebService(address: String): TheSportApi {
-
 
 
     //Add logger interceptor to get trace of Http request
@@ -53,4 +52,5 @@ fun createClientWebService(address: String): TheSportApi {
 
     return retrofit.create(TheSportApi::class.java)
 }
+
 const val THE_SPORT_SDB_ACCESS_POINT_NETWORK_ADDRESS = "https://www.thesportsdb.com/"

@@ -1,5 +1,6 @@
 package com.test.fdj.ui.leagues
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.AdapterView
 import com.test.clientthesportsdb.model.Leagues
@@ -10,6 +11,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.test.fdj.modelapp.STeam
 
 
@@ -20,11 +23,10 @@ class LeagueActivity : BaseActivity() ,LeagueContract.View{
      lateinit var presenterLeague: LeaguesPresenter
      lateinit var localLeagues : List<sLeague>
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_league)
-
-
     }
 
     override fun initializePresenter() {
@@ -46,12 +48,23 @@ class LeagueActivity : BaseActivity() ,LeagueContract.View{
             }
     }
 
-    override fun publishTeamsByLeagues(team :List<STeam>) {
-        TODO("Not yet implemented")
+    override fun publishTeamsByLeagues(teams :List<STeam>) {
+
+        val recyclerView: RecyclerView = findViewById(R.id.recycler_view_teams)
+        recyclerView.apply {
+            layoutManager = GridLayoutManager(context, 2)
+        }
+        val teamsAdapter =TeamsAdapter(baseContext) { team -> adapterOnClick(team) }
+        teamsAdapter.submitList(teams)
+        recyclerView.adapter =teamsAdapter
     }
 
     override fun onResume() {
         super.onResume()
         presenterLeague.getLeague()
+    }
+
+    private fun adapterOnClick(team: STeam) {
+
     }
 }
