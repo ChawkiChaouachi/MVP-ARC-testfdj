@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">MVP-ARC-test-fdj</string>
+    <string name="app_name">League</string>
+    <string name="hint_cham">search league</string>
+    <string name="retry">Retry</string>
+    <string name="error_msg">A technical problem occurred. please retry</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.test.fdj.ui.leagues
 
+import com.test.clientthesportsdb.respository.ErrorResource
 import com.test.clientthesportsdb.respository.SuccessResource
 import com.test.fdj.modelapp.STeam
 import com.test.fdj.modelapp.sLeague
@@ -22,13 +23,18 @@ class LeaguesPresenter @Inject constructor(private val getAllLeaguesUseCase: Get
 
 
     override fun getLeague() {
+        getView()?.showLoading()
         launch(Dispatchers.Main) {
             try {
                 getAllLeaguesUseCase.invoke().collect {
+                    getView()?.hideLoading()
                     when (it) {
                         is SuccessResource<List<sLeague>> -> {
                             getView()?.initializeLeaguesList(it.value)
 
+                        }
+                        is ErrorResource -> {
+                            getView()?.retry(true,"")
                         }
                         else ->{
 
@@ -45,13 +51,18 @@ class LeaguesPresenter @Inject constructor(private val getAllLeaguesUseCase: Get
     }
 
     override fun getTeamsByLeague(idLeague: String) {
+        getView()?.showLoading()
         launch(Dispatchers.Main) {
             try {
                 getAllTeamsByLeagueUseCase.invoke(idLeague).collect {
+                    getView()?.hideLoading()
                     when (it) {
                         is SuccessResource<List<STeam>> -> {
                             getView()?.publishTeamsByLeagues(it.value)
 
+                        }
+                        is ErrorResource -> {
+                            getView()?.retry(false,idLeague)
                         }
                         else ->{
 
