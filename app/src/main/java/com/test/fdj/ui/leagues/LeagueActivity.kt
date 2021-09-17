@@ -1,8 +1,10 @@
 package com.test.fdj.ui.leagues
 
+import android.content.Context
 import android.content.Intent
 import android.icu.lang.UCharacter
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import com.test.clientthesportsdb.model.Leagues
 import com.test.fdj.R
@@ -45,8 +47,10 @@ class LeagueActivity : BaseActivity() ,LeagueContract.View{
         )
         findViewById<AutoCompleteTextView>(R.id.leagues_autocomplete).setAdapter(adapter)
         findViewById<AutoCompleteTextView>(R.id.leagues_autocomplete).onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, i, l ->
+            AdapterView.OnItemClickListener { _, arg1, i, l ->
                 presenterLeague.getTeamsByLeague(leagues[i].idLeague)
+                val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputManager.hideSoftInputFromWindow(arg1.applicationWindowToken, 0)
             }
     }
 
