@@ -1,6 +1,7 @@
 package com.test.fdj.ui.leagues
 
 import android.content.Intent
+import android.icu.lang.UCharacter
 import android.os.Bundle
 import android.widget.AdapterView
 import com.test.clientthesportsdb.model.Leagues
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.test.fdj.modelapp.STeam
 
 
@@ -52,7 +54,7 @@ class LeagueActivity : BaseActivity() ,LeagueContract.View{
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view_teams)
         recyclerView.apply {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         }
         val teamsAdapter =TeamsAdapter(baseContext) { team -> adapterOnClick(team) }
         teamsAdapter.submitList(teams)

@@ -1,6 +1,7 @@
 package com.test.fdj.ui.leagues
 
 import android.content.Context
+import android.opengl.ETC1
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.test.fdj.R
 import com.test.fdj.modelapp.STeam
+import android.util.DisplayMetrics
+
+
+
 
 class TeamsAdapter constructor ( val context: Context,private val onClick: (STeam) -> Unit) :
 ListAdapter<STeam, TeamsAdapter.TeamViewHolder>(TeamDiffCallback) {
@@ -31,9 +36,13 @@ ListAdapter<STeam, TeamsAdapter.TeamViewHolder>(TeamDiffCallback) {
         fun bind(team: STeam) {
             val logoImg =itemView.findViewById<ImageView>(R.id.logo_team)
             Glide.with(itemView.context)
-                .load(team.strTeamLogo)
-                .override(600, 200) // resizes the image to these dimensions (in pixel). resize does not respect aspect ratio
+                .load(team.strTeamBadge)
+                .override(getWidth())
                 .into(logoImg);
+        }
+        private fun getWidth():Int{
+            val displayMetrics = itemView.context.resources.displayMetrics
+            return (displayMetrics.widthPixels-100)/2
         }
 }
 
@@ -47,6 +56,7 @@ ListAdapter<STeam, TeamsAdapter.TeamViewHolder>(TeamDiffCallback) {
         val team = getItem(position)
         holder.bind(team)
     }
+
 
 
 }
