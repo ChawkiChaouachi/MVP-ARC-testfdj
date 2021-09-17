@@ -1,5 +1,6 @@
 package com.test.clientthesportsdb.respository
 
+import android.util.Log
 import com.test.clientthesportsdb.model.Leagues
 import com.test.clientthesportsdb.model.Teams
 import com.test.clientthesportsdb.network.TheSportApi
@@ -20,6 +21,7 @@ class Repository @Inject constructor(private val theSportApi: TheSportApi) : Rem
             val response = theSportApi.getAllTeamsByLeagues(idLeague)
             SuccessResource(response)
         }catch (e :Exception){
+            Log.d("requestAllTeamsBy",e.localizedMessage)
             ErrorResource()
         }
     }
