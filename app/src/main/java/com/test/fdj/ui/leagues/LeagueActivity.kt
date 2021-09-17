@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.icu.lang.UCharacter
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import com.test.clientthesportsdb.model.Leagues
@@ -31,6 +33,7 @@ class LeagueActivity : BaseActivity() ,LeagueContract.View{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_league)
+        presenterLeague.getLeague()
     }
 
     override fun initializePresenter() {
@@ -58,7 +61,7 @@ class LeagueActivity : BaseActivity() ,LeagueContract.View{
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view_teams)
         recyclerView.apply {
-            layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = GridLayoutManager(context,2)
         }
         val teamsAdapter =TeamsAdapter(baseContext) { team -> adapterOnClick(team) }
         teamsAdapter.submitList(teams)
@@ -67,7 +70,6 @@ class LeagueActivity : BaseActivity() ,LeagueContract.View{
 
     override fun onResume() {
         super.onResume()
-        presenterLeague.getLeague()
     }
 
     private fun adapterOnClick(team: STeam) {
